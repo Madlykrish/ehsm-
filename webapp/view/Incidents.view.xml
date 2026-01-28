@@ -1,0 +1,115 @@
+<mvc:View
+    controllerName="ehsm.controller.Incidents"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+    <Page
+        id="incidentsPage"
+        title="Incident Management"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        class="incidentsPage">
+        <headerContent>
+            <Button
+                icon="sap-icon://home"
+                text="Dashboard"
+                press=".onNavToDashboard"
+                class="headerButton"/>
+        </headerContent>
+        <subHeader>
+            <Toolbar>
+                <SearchField
+                    id="searchField"
+                    width="100%"
+                    placeholder="Search incidents..."
+                    search=".onSearch"
+                    class="searchField"/>
+            </Toolbar>
+        </subHeader>
+        <content>
+            <VBox class="incidentsContainer">
+                <Table
+                    id="incidentsTable"
+                    items="{
+                        path: '/ZNK_INCIDENTSet',
+                        filters: {
+                            path: 'EmployeeId',
+                            operator: 'EQ',
+                            value1: ''
+                        }
+                    }"
+                    growing="true"
+                    growingThreshold="20"
+                    mode="None"
+                    class="incidentsTable">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Incidents ({view>/incidentCount})" level="H2"/>
+                            <ToolbarSpacer/>
+                            <Button
+                                icon="sap-icon://refresh"
+                                press=".onRefresh"
+                                tooltip="Refresh"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column width="10%">
+                            <Text text="Incident ID"/>
+                        </Column>
+                        <Column width="25%">
+                            <Text text="Description"/>
+                        </Column>
+                        <Column width="12%">
+                            <Text text="Category"/>
+                        </Column>
+                        <Column width="10%">
+                            <Text text="Priority"/>
+                        </Column>
+                        <Column width="12%">
+                            <Text text="Status"/>
+                        </Column>
+                        <Column width="12%">
+                            <Text text="Date"/>
+                        </Column>
+                        <Column width="10%">
+                            <Text text="Plant"/>
+                        </Column>
+                        <Column width="9%">
+                            <Text text="Created By"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{IncidentId}" class="incidentId"/>
+                                <Text text="{IncidentDescription}" class="incidentDescription"/>
+                                <Text text="{IncidentCategory}" class="incidentCategory"/>
+                                <ObjectStatus
+                                    text="{IncidentPriority}"
+                                    state="{
+                                        path: 'IncidentPriority',
+                                        formatter: '.formatPriorityState'
+                                    }"/>
+                                <ObjectStatus
+                                    text="{IncidentStatus}"
+                                    state="{
+                                        path: 'IncidentStatus',
+                                        formatter: '.formatStatusState'
+                                    }"/>
+                                <Text text="{
+                                    path: 'IncidentDate',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        pattern: 'dd/MM/yyyy'
+                                    }
+                                }"/>
+                                <Text text="{Plant}"/>
+                                <Text text="{CreatedBy}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

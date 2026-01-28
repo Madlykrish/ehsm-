@@ -1,0 +1,109 @@
+<mvc:View
+    controllerName="ehsm.controller.Risks"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+    <Page
+        id="risksPage"
+        title="Risk Assessment"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        class="risksPage">
+        <headerContent>
+            <Button
+                icon="sap-icon://home"
+                text="Dashboard"
+                press=".onNavToDashboard"
+                class="headerButton"/>
+        </headerContent>
+        <subHeader>
+            <Toolbar>
+                <SearchField
+                    id="searchField"
+                    width="100%"
+                    placeholder="Search risks..."
+                    search=".onSearch"
+                    class="searchField"/>
+            </Toolbar>
+        </subHeader>
+        <content>
+            <VBox class="risksContainer">
+                <Table
+                    id="risksTable"
+                    items="{
+                        path: '/ZNK_RISKSet',
+                        filters: {
+                            path: 'EmployeeId',
+                            operator: 'EQ',
+                            value1: ''
+                        }
+                    }"
+                    growing="true"
+                    growingThreshold="20"
+                    mode="None"
+                    class="risksTable">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Risks ({view>/riskCount})" level="H2"/>
+                            <ToolbarSpacer/>
+                            <Button
+                                icon="sap-icon://refresh"
+                                press=".onRefresh"
+                                tooltip="Refresh"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column width="10%">
+                            <Text text="Risk ID"/>
+                        </Column>
+                        <Column width="22%">
+                            <Text text="Description"/>
+                        </Column>
+                        <Column width="12%">
+                            <Text text="Category"/>
+                        </Column>
+                        <Column width="10%">
+                            <Text text="Severity"/>
+                        </Column>
+                        <Column width="10%">
+                            <Text text="Likelihood"/>
+                        </Column>
+                        <Column width="18%">
+                            <Text text="Mitigation Measures"/>
+                        </Column>
+                        <Column width="10%">
+                            <Text text="Plant"/>
+                        </Column>
+                        <Column width="8%">
+                            <Text text="Created By"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{RiskId}" class="riskId"/>
+                                <Text text="{RiskDescription}" class="riskDescription"/>
+                                <Text text="{RiskCategory}" class="riskCategory"/>
+                                <ObjectStatus
+                                    text="{RiskSeverity}"
+                                    state="{
+                                        path: 'RiskSeverity',
+                                        formatter: '.formatSeverityState'
+                                    }"/>
+                                <ObjectStatus
+                                    text="{Likelihood}"
+                                    state="{
+                                        path: 'Likelihood',
+                                        formatter: '.formatLikelihoodState'
+                                    }"/>
+                                <Text text="{MitigationMeasures}" class="mitigationMeasures"/>
+                                <Text text="{Plant}"/>
+                                <Text text="{CreatedBy}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

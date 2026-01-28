@@ -90,17 +90,50 @@
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": ":?query:",
-          "target": [
-            "TargetView1"
-          ]
+          "pattern": "",
+          "name": "Login",
+          "target": "Login"
+        },
+        {
+          "pattern": "dashboard",
+          "name": "Dashboard",
+          "target": "Dashboard"
+        },
+        {
+          "pattern": "incidents",
+          "name": "Incidents",
+          "target": "Incidents"
+        },
+        {
+          "pattern": "risks",
+          "name": "Risks",
+          "target": "Risks"
         }
       ],
       "targets": {
-        "TargetView1": {
-          "id": "View1",
-          "name": "View1"
+        "Login": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewName": "Login"
+        },
+        "Dashboard": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewName": "Dashboard"
+        },
+        "Incidents": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewName": "Incidents"
+        },
+        "Risks": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewName": "Risks"
         }
       }
     },

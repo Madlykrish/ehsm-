@@ -1,0 +1,117 @@
+<mvc:View
+    controllerName="ehsm.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    displayBlock="true">
+    <Page
+        id="dashboardPage"
+        title="Safety Engineer Dashboard"
+        showNavButton="false"
+        class="dashboardPage">
+        <headerContent>
+            <Button
+                icon="sap-icon://log"
+                text="Logout"
+                press=".onLogout"
+                class="logoutButton"/>
+        </headerContent>
+        <content>
+            <VBox class="dashboardContainer">
+                <!-- Welcome Section -->
+                <VBox class="welcomeSection">
+                    <Title
+                        text="Welcome, Safety Engineer"
+                        level="H2"
+                        class="welcomeTitle"/>
+                    <Text
+                        text="Employee ID: {view>/employeeId}"
+                        class="employeeInfo"/>
+                    <Text
+                        text="Plant: AT01"
+                        class="plantInfo"/>
+                </VBox>
+
+                <!-- Statistics Cards -->
+                <HBox class="statsContainer">
+                    <VBox class="statCard statCardIncidents">
+                        <VBox class="statCardHeader">
+                            <Icon src="sap-icon://alert" class="statIcon"/>
+                            <Title text="Total Incidents" level="H4" class="statTitle"/>
+                        </VBox>
+                        <VBox class="statCardBody">
+                            <Text text="{view>/totalIncidents}" class="statNumber"/>
+                            <HBox class="statBreakdown">
+                                <VBox class="statItem">
+                                    <Text text="{view>/openIncidents}" class="statValue statHigh"/>
+                                    <Text text="Open" class="statLabel"/>
+                                </VBox>
+                                <VBox class="statItem">
+                                    <Text text="{view>/inProgressIncidents}" class="statValue statMedium"/>
+                                    <Text text="In Progress" class="statLabel"/>
+                                </VBox>
+                                <VBox class="statItem">
+                                    <Text text="{view>/closedIncidents}" class="statValue statLow"/>
+                                    <Text text="Closed" class="statLabel"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+
+                    <VBox class="statCard statCardRisks">
+                        <VBox class="statCardHeader">
+                            <Icon src="sap-icon://warning" class="statIcon"/>
+                            <Title text="Total Risks" level="H4" class="statTitle"/>
+                        </VBox>
+                        <VBox class="statCardBody">
+                            <Text text="{view>/totalRisks}" class="statNumber"/>
+                            <HBox class="statBreakdown">
+                                <VBox class="statItem">
+                                    <Text text="{view>/highRisks}" class="statValue statHigh"/>
+                                    <Text text="High" class="statLabel"/>
+                                </VBox>
+                                <VBox class="statItem">
+                                    <Text text="{view>/mediumRisks}" class="statValue statMedium"/>
+                                    <Text text="Medium" class="statLabel"/>
+                                </VBox>
+                                <VBox class="statItem">
+                                    <Text text="{view>/lowRisks}" class="statValue statLow"/>
+                                    <Text text="Low" class="statLabel"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <!-- Navigation Tiles -->
+                <VBox class="navigationSection">
+                    <Title text="Quick Access" level="H3" class="sectionTitle"/>
+                    <HBox class="navigationTiles">
+                        <VBox class="navTile navTileIncidents" press=".onNavigateToIncidents">
+                            <Icon src="sap-icon://incident" class="navIcon"/>
+                            <Title text="Incident Management" level="H4" class="navTitle"/>
+                            <Text text="View and manage all incidents" class="navDescription"/>
+                            <Button
+                                text="View Incidents"
+                                type="Emphasized"
+                                press=".onNavigateToIncidents"
+                                class="navButton"/>
+                        </VBox>
+
+                        <VBox class="navTile navTileRisks" press=".onNavigateToRisks">
+                            <Icon src="sap-icon://risk" class="navIcon"/>
+                            <Title text="Risk Assessment" level="H4" class="navTitle"/>
+                            <Text text="View and assess all risks" class="navDescription"/>
+                            <Button
+                                text="View Risks"
+                                type="Emphasized"
+                                press=".onNavigateToRisks"
+                                class="navButton"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

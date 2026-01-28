@@ -1,1 +1,582 @@
-/* Enter your custom styles here */
+/* ===========================
+   EHSM Portal - Premium Styles
+   =========================== */
+
+/* Global Styles */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    
+    --bg-primary: #0f0c29;
+    --bg-secondary: #1a1640;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.ehsmApp {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    min-height: 100vh;
+}
+
+/* ===========================
+   Login Page Styles
+   =========================== */
+
+.loginPage {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    min-height: 100vh;
+}
+
+.loginContainer {
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.loginCard {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loginHeader {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.loginIcon {
+    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+    margin-bottom: 1rem;
+}
+
+.loginTitle {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem !important;
+}
+
+.loginSubtitle {
+    color: var(--text-secondary) !important;
+    font-size: 1rem !important;
+}
+
+.loginForm {
+    gap: 1.5rem;
+}
+
+.loginLabel {
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.loginInput input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+    padding: 0.875rem 1rem !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.loginInput input:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+.loginInput input::placeholder {
+    color: var(--text-muted) !important;
+}
+
+.loginButton {
+    margin-top: 1rem !important;
+    background: var(--primary-gradient) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+    transition: all 0.3s ease !important;
+}
+
+.loginButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+}
+
+.loginButton:active {
+    transform: translateY(0);
+}
+
+.loginMessage {
+    margin-top: 1rem !important;
+    border-radius: 8px !important;
+}
+
+/* ===========================
+   Dashboard Styles
+   =========================== */
+
+.dashboardPage {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+.dashboardContainer {
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.welcomeSection {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.welcomeTitle {
+    color: var(--text-primary) !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.employeeInfo,
+.plantInfo {
+    color: var(--text-secondary) !important;
+    font-size: 1rem !important;
+    margin-top: 0.25rem !important;
+}
+
+.statsContainer {
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.statCard {
+    flex: 1;
+    min-width: 300px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.statCardIncidents {
+    border-left: 4px solid #667eea;
+}
+
+.statCardRisks {
+    border-left: 4px solid #f5576c;
+}
+
+.statCardHeader {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.statIcon {
+    font-size: 2.5rem !important;
+    color: #667eea !important;
+    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+}
+
+.statTitle {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.statCardBody {
+    gap: 1.5rem;
+}
+
+.statNumber {
+    font-size: 3rem !important;
+    font-weight: 700 !important;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.statBreakdown {
+    gap: 1.5rem;
+    justify-content: space-around;
+}
+
+.statItem {
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statValue {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+}
+
+.statHigh {
+    color: #ff6b6b !important;
+}
+
+.statMedium {
+    color: #ffa500 !important;
+}
+
+.statLow {
+    color: #4facfe !important;
+}
+
+.statLabel {
+    color: var(--text-secondary) !important;
+    font-size: 0.875rem !important;
+}
+
+.navigationSection {
+    gap: 1.5rem;
+}
+
+.sectionTitle {
+    color: var(--text-primary) !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+}
+
+.navigationTiles {
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.navTile {
+    flex: 1;
+    min-width: 300px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    gap: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.navTile:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.navTileIncidents:hover {
+    border-color: #667eea;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+}
+
+.navTileRisks:hover {
+    border-color: #f5576c;
+    box-shadow: 0 8px 32px rgba(245, 87, 108, 0.3);
+}
+
+.navIcon {
+    font-size: 3rem !important;
+    color: #667eea !important;
+    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+}
+
+.navTitle {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.navDescription {
+    color: var(--text-secondary) !important;
+    font-size: 0.875rem !important;
+}
+
+.navButton {
+    margin-top: 1rem !important;
+    background: var(--primary-gradient) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+}
+
+.navButton:hover {
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+}
+
+.logoutButton {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    color: white !important;
+}
+
+.logoutButton:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ===========================
+   Incidents & Risks Pages
+   =========================== */
+
+.incidentsPage,
+.risksPage {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+.incidentsContainer,
+.risksContainer {
+    padding: 2rem;
+}
+
+.incidentsTable,
+.risksTable {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.incidentsTable .sapMListTblRow,
+.risksTable .sapMListTblRow {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.2s ease;
+}
+
+.incidentsTable .sapMListTblRow:hover,
+.risksTable .sapMListTblRow:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    transform: scale(1.01);
+}
+
+.incidentsTable .sapMListTblHeaderCell,
+.risksTable .sapMListTblHeaderCell {
+    background: rgba(102, 126, 234, 0.2) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #667eea !important;
+}
+
+.searchField input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+.searchField input:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: #667eea !important;
+}
+
+.headerButton {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    color: white !important;
+}
+
+.headerButton:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ===========================
+   Table Cell Styles
+   =========================== */
+
+.incidentId,
+.riskId {
+    color: #667eea !important;
+    font-weight: 600 !important;
+}
+
+.incidentDescription,
+.riskDescription {
+    color: var(--text-primary) !important;
+}
+
+.incidentCategory,
+.riskCategory {
+    color: var(--text-secondary) !important;
+}
+
+.mitigationMeasures {
+    color: var(--text-secondary) !important;
+    font-size: 0.875rem !important;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+@media (max-width: 768px) {
+    .statsContainer,
+    .navigationTiles {
+        flex-direction: column;
+    }
+    
+    .statCard,
+    .navTile {
+        min-width: 100%;
+    }
+    
+    .loginCard {
+        padding: 2rem 1.5rem;
+    }
+    
+    .dashboardContainer,
+    .incidentsContainer,
+    .risksContainer {
+        padding: 1rem;
+    }
+}
+
+/* ===========================
+   UI5 Component Overrides
+   =========================== */
+
+.sapMPage {
+    background: transparent !important;
+}
+
+.sapMPageHeader {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.sapMTitle {
+    color: var(--text-primary) !important;
+}
+
+.sapMText {
+    color: var(--text-secondary) !important;
+}
+
+.sapMBtn {
+    transition: all 0.3s ease !important;
+}
+
+.sapMBtn:hover {
+    transform: translateY(-2px);
+}
+
+.sapMObjectStatus {
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    padding: 0.25rem 0.75rem !important;
+}
+
+/* ===========================
+   Animations
+   =========================== */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.sapUiBlockLayerTabbable {
+    background: rgba(15, 12, 41, 0.8) !important;
+    backdrop-filter: blur(10px);
+}
+
+/* ===========================
+   Scrollbar Styling
+   =========================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.7);
+}

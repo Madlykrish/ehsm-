@@ -1,0 +1,70 @@
+<mvc:View
+    controllerName="ehsm.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+    <Page
+        id="loginPage"
+        showHeader="false"
+        class="loginPage">
+        <content>
+            <VBox
+                alignItems="Center"
+                justifyContent="Center"
+                class="loginContainer">
+                <VBox class="loginCard">
+                    <VBox class="loginHeader">
+                        <Image
+                            src="sap-icon://shield"
+                            width="80px"
+                            class="loginIcon"/>
+                        <Title
+                            text="EHSM Portal"
+                            class="loginTitle"/>
+                        <Text
+                            text="Safety Engineer Login"
+                            class="loginSubtitle"/>
+                    </VBox>
+                    
+                    <VBox class="loginForm">
+                        <Label
+                            text="Employee ID"
+                            labelFor="employeeIdInput"
+                            class="loginLabel"/>
+                        <Input
+                            id="employeeIdInput"
+                            placeholder="Enter Employee ID"
+                            value="{/employeeId}"
+                            class="loginInput"/>
+                        
+                        <Label
+                            text="Password"
+                            labelFor="passwordInput"
+                            class="loginLabel"/>
+                        <Input
+                            id="passwordInput"
+                            type="Password"
+                            placeholder="Enter Password"
+                            value="{/password}"
+                            class="loginInput"
+                            submit=".onLogin"/>
+                        
+                        <Button
+                            text="Login"
+                            type="Emphasized"
+                            width="100%"
+                            press=".onLogin"
+                            class="loginButton"/>
+                        
+                        <MessageStrip
+                            id="loginMessage"
+                            visible="false"
+                            showIcon="true"
+                            class="loginMessage"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

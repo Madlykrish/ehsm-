@@ -1,0 +1,13 @@
+{
+    "welcomeFile": "/index.html",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "^/sap/opu/odata/(.*)$",
+            "target": "/sap/opu/odata/$1",
+            "destination": "SAP_BACKEND",
+            "authenticationType": "none",
+            "csrfProtection": false
+        }
+    ]
+}

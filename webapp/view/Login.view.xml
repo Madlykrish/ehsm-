@@ -35,7 +35,7 @@
                         <Input
                             id="employeeIdInput"
                             placeholder="Enter Employee ID"
-                            value="{/employeeId}"
+                            value="{view>/employeeId}"
                             class="loginInput"/>
                         
                         <Label
@@ -46,7 +46,7 @@
                             id="passwordInput"
                             type="Password"
                             placeholder="Enter Password"
-                            value="{/password}"
+                            value="{view>/password}"
                             class="loginInput"
                             submit=".onLogin"/>
                         

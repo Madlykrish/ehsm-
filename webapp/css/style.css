@@ -9,25 +9,41 @@
     --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-    
+
     --bg-primary: #0f0c29;
     --bg-secondary: #1a1640;
     --bg-card: rgba(255, 255, 255, 0.05);
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
-    
+
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-muted: rgba(255, 255, 255, 0.5);
-    
+
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
     --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
 }
 
+/* Force dark background on body and html */
+html,
+body {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
+    min-height: 100vh !important;
+}
+
+/* SAPUI5 Shell and App background */
+.sapUiBody,
+.sapUiGlobalBackgroundColor,
+.sapMShell,
+.sapMShellCentralBox,
+.sapUiBody.sapUiSizeCompact {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
+}
+
 .ehsmApp {
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
     min-height: 100vh;
 }
 
@@ -36,7 +52,7 @@
    =========================== */
 
 .loginPage {
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
     min-height: 100vh;
 }
 
@@ -63,6 +79,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -104,14 +121,26 @@
     margin-bottom: 0.5rem !important;
 }
 
+/* Force label text to be visible */
+.loginLabel .sapMLabel {
+    color: #ffffff !important;
+}
+
 .loginInput input {
     background: rgba(255, 255, 255, 0.08) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 12px !important;
-    color: var(--text-primary) !important;
+    color: #ffffff !important;
     padding: 0.875rem 1rem !important;
     font-size: 1rem !important;
     transition: all 0.3s ease !important;
+}
+
+/* Force input text to be white */
+.loginInput .sapMInputBaseInner {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
 .loginInput input:focus {
@@ -122,6 +151,17 @@
 
 .loginInput input::placeholder {
     color: var(--text-muted) !important;
+}
+
+/* Additional overrides for SAPUI5 input controls */
+.sapMInput .sapMInputBaseInner,
+.sapMInputBase .sapMInputBaseInner {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.sapMLabel {
+    color: #ffffff !important;
 }
 
 .loginButton {
@@ -176,8 +216,13 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .welcomeTitle {
@@ -218,6 +263,7 @@
         opacity: 0;
         transform: translateX(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -483,20 +529,21 @@
    =========================== */
 
 @media (max-width: 768px) {
+
     .statsContainer,
     .navigationTiles {
         flex-direction: column;
     }
-    
+
     .statCard,
     .navTile {
         min-width: 100%;
     }
-    
+
     .loginCard {
         padding: 2rem 1.5rem;
     }
-    
+
     .dashboardContainer,
     .incidentsContainer,
     .risksContainer {
@@ -542,13 +589,68 @@
 }
 
 /* ===========================
+   Comprehensive Text Color Fixes
+   =========================== */
+
+/* All labels should be white */
+.sapMLabel,
+label.sapMLabel,
+.sapMText,
+.sapUiFormElementLbl,
+.sapMInputBaseContentWrapper .sapMLabel {
+    color: #ffffff !important;
+}
+
+/* All input fields */
+.sapMInputBaseInner,
+.sapMInput input,
+input.sapMInputBaseInner {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Placeholder text */
+.sapMInputBaseInner::placeholder,
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Title text */
+.sapMTitle,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #ffffff !important;
+}
+
+/* General text */
+span,
+p,
+div {
+    color: inherit;
+}
+
+/* VBox and HBox text */
+.sapUiVBox .sapMText,
+.sapUiHBox .sapMText {
+    color: #ffffff !important;
+}
+
+/* ===========================
    Animations
    =========================== */
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 1;
     }
+
     50% {
         opacity: 0.8;
     }

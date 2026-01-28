@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/sap/ZEHSM_NK_SRV/",
+        "uri": "/sap/opu/odata/SAP/ZEHSM_NK_SRV/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -71,7 +71,12 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "useBatch": false,
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
       }
     },
     "resources": {

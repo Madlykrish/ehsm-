@@ -15,7 +15,7 @@ sap.ui.define([
                 password: ""
             });
             this.getView().setModel(oViewModel, "view");
-            
+
             // Check if already logged in
             var sEmployeeId = sessionStorage.getItem("employeeId");
             if (sEmployeeId) {
@@ -49,19 +49,22 @@ sap.ui.define([
             var sPaddedEmployeeId = sEmployeeId.padStart(8, '0');
 
             // Call login OData service
-            var sPath = "/ZNK_loginSet(EmployeeId='" + sPaddedEmployeeId + "',Password='" + sPassword + "')";
+            var sPath = "/ZNK_loginSet(EmployeeId='" + sPaddedEmployeeId + "',Password='" + encodeURIComponent(sPassword) + "')";
 
             oModel.read(sPath, {
+                urlParameters: {
+                    "$format": "json"
+                },
                 success: function (oData) {
                     oView.setBusy(false);
-                    
+
                     if (oData.Status === "Success") {
                         // Store employee ID in session
                         sessionStorage.setItem("employeeId", sPaddedEmployeeId);
-                        
+
                         // Show success message
                         MessageToast.show("Login successful!");
-                        
+
                         // Navigate to dashboard
                         this.getOwnerComponent().getRouter().navTo("Dashboard");
                     } else {
@@ -72,17 +75,25 @@ sap.ui.define([
                 }.bind(this),
                 error: function (oError) {
                     oView.setBusy(false);
-                    
-                    var sErrorMessage = "Login failed. Please check your credentials.";
-                    try {
-                        var oErrorResponse = JSON.parse(oError.responseText);
-                        if (oErrorResponse.error && oErrorResponse.error.message) {
-                            sErrorMessage = oErrorResponse.error.message.value;
+
+                    var sErrorMessage = "Login failed. Please check your credentials and network connection.";
+
+                    // Try to parse error response
+                    if (oError.responseText) {
+                        try {
+                            var oErrorResponse = JSON.parse(oError.responseText);
+                            if (oErrorResponse.error && oErrorResponse.error.message) {
+                                sErrorMessage = oErrorResponse.error.message.value || oErrorResponse.error.message;
+                            }
+                        } catch (e) {
+                            // If JSON parsing fails, check if it's XML
+                            if (oError.responseText.indexOf("<?xml") === 0) {
+                                sErrorMessage = "Login failed. Please verify your credentials.";
+                            }
                         }
-                    } catch (e) {
-                        // Use default error message
                     }
-                    
+
+                    console.error("Login error:", oError);
                     oMessageStrip.setText(sErrorMessage);
                     oMessageStrip.setType("Error");
                     oMessageStrip.setVisible(true);

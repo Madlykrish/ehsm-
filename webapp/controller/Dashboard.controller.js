@@ -37,6 +37,8 @@ sap.ui.define([
 
         _loadDashboardData: function () {
             var sEmployeeId = sessionStorage.getItem("employeeId");
+            console.log("Loading dashboard data for EmployeeId:", sEmployeeId);
+
             var oModel = this.getOwnerComponent().getModel();
             var oViewModel = this.getView().getModel("view");
 
@@ -47,8 +49,12 @@ sap.ui.define([
 
             oModel.read("/ZNK_INCIDENTSet", {
                 filters: aIncidentFilters,
+                urlParameters: {
+                    "$format": "json"
+                },
                 success: function (oData) {
-                    var aIncidents = oData.results;
+                    console.log("Incidents loaded:", oData);
+                    var aIncidents = oData.results || [];
                     var iOpen = 0, iInProgress = 0, iClosed = 0;
 
                     aIncidents.forEach(function (oIncident) {
@@ -67,7 +73,8 @@ sap.ui.define([
                     oViewModel.setProperty("/closedIncidents", iClosed);
                 }.bind(this),
                 error: function (oError) {
-                    MessageToast.show("Failed to load incident data");
+                    console.error("Failed to load incidents:", oError);
+                    MessageToast.show("Failed to load incident data: " + oError.message);
                 }
             });
 
@@ -78,8 +85,12 @@ sap.ui.define([
 
             oModel.read("/ZNK_RISKSet", {
                 filters: aRiskFilters,
+                urlParameters: {
+                    "$format": "json"
+                },
                 success: function (oData) {
-                    var aRisks = oData.results;
+                    console.log("Risks loaded:", oData);
+                    var aRisks = oData.results || [];
                     var iHigh = 0, iMedium = 0, iLow = 0;
 
                     aRisks.forEach(function (oRisk) {
@@ -98,7 +109,8 @@ sap.ui.define([
                     oViewModel.setProperty("/lowRisks", iLow);
                 }.bind(this),
                 error: function (oError) {
-                    MessageToast.show("Failed to load risk data");
+                    console.error("Failed to load risks:", oError);
+                    MessageToast.show("Failed to load risk data: " + oError.message);
                 }
             });
         },

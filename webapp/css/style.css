@@ -136,15 +136,15 @@ body {
     transition: all 0.3s ease !important;
 }
 
-/* Force input text to be white */
+/* Force input text to be white and background to be dark blue */
 .loginInput .sapMInputBaseInner {
     color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: rgba(13, 25, 60, 0.6) !important;
+    border: 1px solid rgba(102, 126, 234, 0.3) !important;
 }
 
 .loginInput input:focus {
-    background: rgba(255, 255, 255, 0.12) !important;
+    background: rgba(13, 25, 60, 0.8) !important;
     border-color: #667eea !important;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
 }
@@ -606,8 +606,8 @@ label.sapMLabel,
 .sapMInput input,
 input.sapMInputBaseInner {
     color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(13, 25, 60, 0.6) !important;
+    border-color: rgba(102, 126, 234, 0.3) !important;
 }
 
 /* Placeholder text */

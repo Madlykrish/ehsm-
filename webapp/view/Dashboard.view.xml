@@ -28,7 +28,10 @@
                         class="welcomeTitle"/>
                     <Text
                         text="Employee ID: {view>/employeeId}"
-                        class="employeeInfo"/>
+                        class="employeeInfo"
+                        binding="{view>/employeeId}" />
+                    <!-- DEBUG: Added inline style to verify code update -->
+                    <Text text="(Debug Mode Active)" visible="true" />
                     <Text
                         text="Plant: AT01"
                         class="plantInfo"/>

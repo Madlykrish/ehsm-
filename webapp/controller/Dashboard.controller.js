@@ -37,6 +37,7 @@ sap.ui.define([
 
         _loadDashboardData: function () {
             var sEmployeeId = sessionStorage.getItem("employeeId");
+            alert("DEBUG: Dashboard loaded for ID: " + sEmployeeId);
             console.log("Loading dashboard data for EmployeeId:", sEmployeeId);
 
             var oModel = this.getOwnerComponent().getModel();

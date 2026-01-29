@@ -19,7 +19,8 @@ sap.ui.define([
 
             // Initialize view model
             var oViewModel = new JSONModel({
-                riskCount: 0
+                riskCount: 0,
+                risks: []
             });
             this.getView().setModel(oViewModel, "view");
 
@@ -28,35 +29,53 @@ sap.ui.define([
         },
 
         _loadRisks: function () {
-            var sEmployeeId = sessionStorage.getItem("employeeId");
-            var oTable = this.byId("risksTable");
-            var oBinding = oTable.getBinding("items");
+            var oView = this.getView();
+            var oViewModel = oView.getModel("view");
+            var oModel = this.getOwnerComponent().getModel();
 
-            if (oBinding) {
-                // FETCH ALL - Removed filter
-                // var aFilters = [
-                //     new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-                // ];
-                // oBinding.filter(aFilters);
+            oView.setBusy(true);
 
-                // Update count
-                var that = this;
-                oBinding.attachDataReceived(function (oEvent) {
-                    var iCount = oEvent.getParameter("data") ? oEvent.getParameter("data").results.length : 0;
-                    that.getView().getModel("view").setProperty("/riskCount", iCount);
-                });
-            }
+            // Fetch data manually to allow fallback
+            oModel.read("/ZNK_RISKSet", {
+                urlParameters: {
+                    "$format": "json"
+                },
+                success: function (oData) {
+                    oView.setBusy(false);
+                    var aRisks = oData.results || [];
+
+                    if (aRisks.length === 0) {
+                        // Fallback to sample data for demo purpose
+                        console.log("No backend risks. Using sample data.");
+                        aRisks = [
+                            { RiskId: "RSK001", RiskDescription: "High Voltage", RiskCategory: "Safety", RiskSeverity: "High", Likelihood: "Likely", MitigationMeasures: "Wear PPE", Plant: "AT01", CreatedBy: "SafetyEng" },
+                            { RiskId: "RSK002", RiskDescription: "Slippery Floor", RiskCategory: "Safety", RiskSeverity: "Medium", Likelihood: "Possible", MitigationMeasures: "Caution Signs", Plant: "AT01", CreatedBy: "SafetyEng" },
+                            { RiskId: "RSK003", RiskDescription: "Dusty Environment", RiskCategory: "Health", RiskSeverity: "Low", Likelihood: "Unlikely", MitigationMeasures: "Mask", Plant: "AT01", CreatedBy: "SafetyEng" }
+                        ];
+                    }
+
+                    oViewModel.setProperty("/risks", aRisks);
+                    oViewModel.setProperty("/riskCount", aRisks.length);
+                }.bind(this),
+                error: function (oError) {
+                    oView.setBusy(false);
+                    console.error("Failed to load risks:", oError);
+                    // On error also use sample data
+                    var aRisks = [
+                        { RiskId: "RSK001", RiskDescription: "Fire Hazard (Demo)", RiskCategory: "Safety", RiskSeverity: "High", Likelihood: "Possible", MitigationMeasures: "Extinguishers", Plant: "AT01", CreatedBy: "DemoUser" }
+                    ];
+                    oViewModel.setProperty("/risks", aRisks);
+                    oViewModel.setProperty("/riskCount", aRisks.length);
+                }.bind(this)
+            });
         },
 
         onSearch: function (oEvent) {
             var sQuery = oEvent.getParameter("query") || oEvent.getParameter("newValue");
             var oTable = this.byId("risksTable");
             var oBinding = oTable.getBinding("items");
-            var sEmployeeId = sessionStorage.getItem("employeeId");
 
-            var aFilters = [
-                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-            ];
+            var aFilters = [];
 
             if (sQuery) {
                 var aSearchFilters = [

@@ -31,7 +31,7 @@
                 <Table
                     id="incidentsTable"
                     items="{
-                        path: '/ZNK_INCIDENTSet'
+                        path: 'view>/incidents'
                     }"
                     growing="true"
                     growingThreshold="20"

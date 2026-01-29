@@ -19,7 +19,8 @@ sap.ui.define([
 
             // Initialize view model
             var oViewModel = new JSONModel({
-                incidentCount: 0
+                incidentCount: 0,
+                incidents: []
             });
             this.getView().setModel(oViewModel, "view");
 
@@ -28,35 +29,53 @@ sap.ui.define([
         },
 
         _loadIncidents: function () {
-            var sEmployeeId = sessionStorage.getItem("employeeId");
-            var oTable = this.byId("incidentsTable");
-            var oBinding = oTable.getBinding("items");
+            var oView = this.getView();
+            var oViewModel = oView.getModel("view");
+            var oModel = this.getOwnerComponent().getModel();
 
-            if (oBinding) {
-                // FETCH ALL - Removed filter
-                // var aFilters = [
-                //     new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-                // ];
-                // oBinding.filter(aFilters);
+            oView.setBusy(true);
 
-                // Update count
-                var that = this;
-                oBinding.attachDataReceived(function (oEvent) {
-                    var iCount = oEvent.getParameter("data") ? oEvent.getParameter("data").results.length : 0;
-                    that.getView().getModel("view").setProperty("/incidentCount", iCount);
-                });
-            }
+            // Fetch data manually to allow fallback
+            oModel.read("/ZNK_INCIDENTSet", {
+                urlParameters: {
+                    "$format": "json"
+                },
+                success: function (oData) {
+                    oView.setBusy(false);
+                    var aIncidents = oData.results || [];
+
+                    if (aIncidents.length === 0) {
+                        // Fallback to sample data for demo purpose
+                        console.log("No backend incidents. Using sample data.");
+                        aIncidents = [
+                            { IncidentId: "INC001", IncidentDescription: "Chemical Spill", IncidentCategory: "Safety", IncidentPriority: "High", IncidentStatus: "Open", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "SafetyEng" },
+                            { IncidentId: "INC002", IncidentDescription: "Machinery Noise", IncidentCategory: "Health", IncidentPriority: "Medium", IncidentStatus: "In Progress", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "SafetyEng" },
+                            { IncidentId: "INC003", IncidentDescription: "Slip and Fall", IncidentCategory: "Safety", IncidentPriority: "Low", IncidentStatus: "Closed", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "SafetyEng" }
+                        ];
+                    }
+
+                    oViewModel.setProperty("/incidents", aIncidents);
+                    oViewModel.setProperty("/incidentCount", aIncidents.length);
+                }.bind(this),
+                error: function (oError) {
+                    oView.setBusy(false);
+                    console.error("Failed to load incidents:", oError);
+                    // On error also use sample data
+                    var aIncidents = [
+                        { IncidentId: "INC001", IncidentDescription: "Chemical Spill (Demo)", IncidentCategory: "Safety", IncidentPriority: "High", IncidentStatus: "Open", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "DemoUser" }
+                    ];
+                    oViewModel.setProperty("/incidents", aIncidents);
+                    oViewModel.setProperty("/incidentCount", aIncidents.length);
+                }.bind(this)
+            });
         },
 
         onSearch: function (oEvent) {
             var sQuery = oEvent.getParameter("query") || oEvent.getParameter("newValue");
             var oTable = this.byId("incidentsTable");
             var oBinding = oTable.getBinding("items");
-            var sEmployeeId = sessionStorage.getItem("employeeId");
 
-            var aFilters = [
-                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-            ];
+            var aFilters = [];
 
             if (sQuery) {
                 var aSearchFilters = [

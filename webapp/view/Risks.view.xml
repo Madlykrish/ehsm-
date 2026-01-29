@@ -31,7 +31,7 @@
                 <Table
                     id="risksTable"
                     items="{
-                        path: '/ZNK_RISKSet'
+                        path: 'view>/risks'
                     }"
                     growing="true"
                     growingThreshold="20"

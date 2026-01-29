@@ -45,15 +45,7 @@ sap.ui.define([
                     oView.setBusy(false);
                     var aRisks = oData.results || [];
 
-                    if (aRisks.length === 0) {
-                        // Fallback to sample data for demo purpose
-                        console.log("No backend risks. Using sample data.");
-                        aRisks = [
-                            { RiskId: "RSK001", RiskDescription: "High Voltage", RiskCategory: "Safety", RiskSeverity: "High", Likelihood: "Likely", MitigationMeasures: "Wear PPE", Plant: "AT01", CreatedBy: "SafetyEng" },
-                            { RiskId: "RSK002", RiskDescription: "Slippery Floor", RiskCategory: "Safety", RiskSeverity: "Medium", Likelihood: "Possible", MitigationMeasures: "Caution Signs", Plant: "AT01", CreatedBy: "SafetyEng" },
-                            { RiskId: "RSK003", RiskDescription: "Dusty Environment", RiskCategory: "Health", RiskSeverity: "Low", Likelihood: "Unlikely", MitigationMeasures: "Mask", Plant: "AT01", CreatedBy: "SafetyEng" }
-                        ];
-                    }
+
 
                     oViewModel.setProperty("/risks", aRisks);
                     oViewModel.setProperty("/riskCount", aRisks.length);
@@ -61,12 +53,8 @@ sap.ui.define([
                 error: function (oError) {
                     oView.setBusy(false);
                     console.error("Failed to load risks:", oError);
-                    // On error also use sample data
-                    var aRisks = [
-                        { RiskId: "RSK001", RiskDescription: "Fire Hazard (Demo)", RiskCategory: "Safety", RiskSeverity: "High", Likelihood: "Possible", MitigationMeasures: "Extinguishers", Plant: "AT01", CreatedBy: "DemoUser" }
-                    ];
-                    oViewModel.setProperty("/risks", aRisks);
-                    oViewModel.setProperty("/riskCount", aRisks.length);
+                    oViewModel.setProperty("/risks", []);
+                    oViewModel.setProperty("/riskCount", 0);
                 }.bind(this)
             });
         },

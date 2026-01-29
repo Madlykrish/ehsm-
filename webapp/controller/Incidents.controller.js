@@ -45,15 +45,7 @@ sap.ui.define([
                     oView.setBusy(false);
                     var aIncidents = oData.results || [];
 
-                    if (aIncidents.length === 0) {
-                        // Fallback to sample data for demo purpose
-                        console.log("No backend incidents. Using sample data.");
-                        aIncidents = [
-                            { IncidentId: "INC001", IncidentDescription: "Chemical Spill", IncidentCategory: "Safety", IncidentPriority: "High", IncidentStatus: "Open", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "SafetyEng" },
-                            { IncidentId: "INC002", IncidentDescription: "Machinery Noise", IncidentCategory: "Health", IncidentPriority: "Medium", IncidentStatus: "In Progress", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "SafetyEng" },
-                            { IncidentId: "INC003", IncidentDescription: "Slip and Fall", IncidentCategory: "Safety", IncidentPriority: "Low", IncidentStatus: "Closed", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "SafetyEng" }
-                        ];
-                    }
+
 
                     oViewModel.setProperty("/incidents", aIncidents);
                     oViewModel.setProperty("/incidentCount", aIncidents.length);
@@ -61,12 +53,8 @@ sap.ui.define([
                 error: function (oError) {
                     oView.setBusy(false);
                     console.error("Failed to load incidents:", oError);
-                    // On error also use sample data
-                    var aIncidents = [
-                        { IncidentId: "INC001", IncidentDescription: "Chemical Spill (Demo)", IncidentCategory: "Safety", IncidentPriority: "High", IncidentStatus: "Open", IncidentDate: new Date(), Plant: "AT01", CreatedBy: "DemoUser" }
-                    ];
-                    oViewModel.setProperty("/incidents", aIncidents);
-                    oViewModel.setProperty("/incidentCount", aIncidents.length);
+                    oViewModel.setProperty("/incidents", []);
+                    oViewModel.setProperty("/incidentCount", 0);
                 }.bind(this)
             });
         },

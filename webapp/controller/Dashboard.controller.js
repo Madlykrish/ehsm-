@@ -52,18 +52,6 @@ sap.ui.define([
                     var aIncidents = oData.results || [];
                     console.log("Incidents loaded (" + aIncidents.length + "):", JSON.stringify(aIncidents));
 
-                    // FALLBACK: If backend has no data, use sample data for demo
-                    if (aIncidents.length === 0) {
-                        console.log("No backend data. Using sample incidents.");
-                        aIncidents = [
-                            { IncidentStatus: "Open" },
-                            { IncidentStatus: "Open" },
-                            { IncidentStatus: "In Progress" },
-                            { IncidentStatus: "Closed" },
-                            { IncidentStatus: "Open" }
-                        ];
-                    }
-
                     var iOpen = 0, iInProgress = 0, iClosed = 0;
 
                     aIncidents.forEach(function (oIncident) {
@@ -98,16 +86,6 @@ sap.ui.define([
                 },
                 success: function (oData) {
                     var aRisks = oData.results || [];
-
-                    // FALLBACK: If backend has no data, use sample data for demo
-                    if (aRisks.length === 0) {
-                        aRisks = [
-                            { RiskSeverity: "High" },
-                            { RiskSeverity: "High" },
-                            { RiskSeverity: "Medium" },
-                            { RiskSeverity: "Low" }
-                        ];
-                    }
 
                     var iHigh = 0, iMedium = 0, iLow = 0;
 

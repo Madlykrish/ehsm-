@@ -31,7 +31,7 @@
                 <Table
                     id="incidentsTable"
                     items="{
-                        path: 'view>/incidents'
+                        path: '/incidents'
                     }"
                     growing="true"
                     growingThreshold="20"

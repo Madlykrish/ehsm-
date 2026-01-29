@@ -23,6 +23,7 @@ sap.ui.define([
                 risks: []
             });
             this.getView().setModel(oViewModel, "view");
+            this.getView().setModel(oViewModel); // Set as default model for easier binding
 
             // Load risks
             this._loadRisks();

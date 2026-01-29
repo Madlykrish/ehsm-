@@ -92,7 +92,7 @@
                 <VBox class="navigationSection">
                     <Title text="Quick Access" level="H3" class="sectionTitle"/>
                     <HBox class="navigationTiles">
-                        <VBox class="navTile navTileIncidents" press=".onNavigateToIncidents">
+                        <VBox class="navTile navTileIncidents">
                             <core:Icon src="sap-icon://incident" class="navIcon"/>
                             <Title text="Incident Management" level="H4" class="navTitle"/>
                             <Text text="View and manage all incidents" class="navDescription"/>
@@ -103,7 +103,7 @@
                                 class="navButton"/>
                         </VBox>
 
-                        <VBox class="navTile navTileRisks" press=".onNavigateToRisks">
+                        <VBox class="navTile navTileRisks">
                             <core:Icon src="sap-icon://risk" class="navIcon"/>
                             <Title text="Risk Assessment" level="H4" class="navTitle"/>
                             <Text text="View and assess all risks" class="navDescription"/>

@@ -54,8 +54,10 @@ sap.ui.define([
                     "$format": "json"
                 },
                 success: function (oData) {
-                    console.log("Incidents loaded:", oData);
                     var aIncidents = oData.results || [];
+                    console.log("Incidents loaded (" + aIncidents.length + "):", JSON.stringify(aIncidents));
+                    alert("DEBUG: Backend returned " + aIncidents.length + " incidents for Employee " + sEmployeeId);
+
                     var iOpen = 0, iInProgress = 0, iClosed = 0;
 
                     aIncidents.forEach(function (oIncident) {

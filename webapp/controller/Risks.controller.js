@@ -45,7 +45,11 @@ sap.ui.define([
                     oView.setBusy(false);
                     var aRisks = oData.results || [];
 
-
+                    if (aRisks.length === 0) {
+                        MessageToast.show("Backend returned 0 Risks.");
+                    } else {
+                        MessageToast.show("Loaded " + aRisks.length + " Risks.");
+                    }
 
                     oViewModel.setProperty("/risks", aRisks);
                     oViewModel.setProperty("/riskCount", aRisks.length);

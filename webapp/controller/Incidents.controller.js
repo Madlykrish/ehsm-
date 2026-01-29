@@ -45,7 +45,11 @@ sap.ui.define([
                     oView.setBusy(false);
                     var aIncidents = oData.results || [];
 
-
+                    if (aIncidents.length === 0) {
+                        MessageToast.show("Backend returned 0 Incidents.");
+                    } else {
+                        MessageToast.show("Loaded " + aIncidents.length + " Incidents.");
+                    }
 
                     oViewModel.setProperty("/incidents", aIncidents);
                     oViewModel.setProperty("/incidentCount", aIncidents.length);

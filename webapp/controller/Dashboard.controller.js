@@ -52,6 +52,13 @@ sap.ui.define([
                     var aIncidents = oData.results || [];
                     console.log("Incidents loaded (" + aIncidents.length + "):", JSON.stringify(aIncidents));
 
+                    // Notify user EXACTLY what backend returned
+                    if (aIncidents.length === 0) {
+                        MessageToast.show("Backend returned 0 Incidents. Check SAP System.");
+                    } else {
+                        MessageToast.show("Loaded " + aIncidents.length + " Incidents from Backend.");
+                    }
+
                     var iOpen = 0, iInProgress = 0, iClosed = 0;
 
                     aIncidents.forEach(function (oIncident) {

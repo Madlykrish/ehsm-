@@ -2,6 +2,7 @@
     controllerName="ehsm.controller.Dashboard"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
     xmlns:card="sap.f.cards"
     displayBlock="true">
@@ -37,7 +38,7 @@
                 <HBox class="statsContainer">
                     <VBox class="statCard statCardIncidents">
                         <VBox class="statCardHeader">
-                            <Icon src="sap-icon://alert" class="statIcon"/>
+                            <core:Icon src="sap-icon://alert" class="statIcon"/>
                             <Title text="Total Incidents" level="H4" class="statTitle"/>
                         </VBox>
                         <VBox class="statCardBody">
@@ -61,7 +62,7 @@
 
                     <VBox class="statCard statCardRisks">
                         <VBox class="statCardHeader">
-                            <Icon src="sap-icon://warning" class="statIcon"/>
+                            <core:Icon src="sap-icon://warning" class="statIcon"/>
                             <Title text="Total Risks" level="H4" class="statTitle"/>
                         </VBox>
                         <VBox class="statCardBody">
@@ -89,7 +90,7 @@
                     <Title text="Quick Access" level="H3" class="sectionTitle"/>
                     <HBox class="navigationTiles">
                         <VBox class="navTile navTileIncidents" press=".onNavigateToIncidents">
-                            <Icon src="sap-icon://incident" class="navIcon"/>
+                            <core:Icon src="sap-icon://incident" class="navIcon"/>
                             <Title text="Incident Management" level="H4" class="navTitle"/>
                             <Text text="View and manage all incidents" class="navDescription"/>
                             <Button
@@ -100,7 +101,7 @@
                         </VBox>
 
                         <VBox class="navTile navTileRisks" press=".onNavigateToRisks">
-                            <Icon src="sap-icon://risk" class="navIcon"/>
+                            <core:Icon src="sap-icon://risk" class="navIcon"/>
                             <Title text="Risk Assessment" level="H4" class="navTitle"/>
                             <Text text="View and assess all risks" class="navDescription"/>
                             <Button

@@ -51,7 +51,7 @@ sap.ui.define([
             var sPaddedEmployeeId = sEmployeeId.padStart(8, '0');
 
             // DEBUG: Alert to verify input
-            alert("DEBUG: Logging in with ID: " + sPaddedEmployeeId);
+            // alert("DEBUG: Logging in with ID: " + sPaddedEmployeeId);
 
             // Call login OData service
             var sPath = "/ZNK_loginSet(EmployeeId='" + sPaddedEmployeeId + "',Password='" + encodeURIComponent(sPassword) + "')";

@@ -37,7 +37,7 @@ sap.ui.define([
 
         _loadDashboardData: function () {
             var sEmployeeId = sessionStorage.getItem("employeeId");
-            alert("DEBUG: Dashboard loaded for ID: " + sEmployeeId);
+            // alert("DEBUG: Dashboard loaded for ID: " + sEmployeeId);
             console.log("Loading dashboard data for EmployeeId:", sEmployeeId);
 
             var oModel = this.getOwnerComponent().getModel();
@@ -51,7 +51,7 @@ sap.ui.define([
                 success: function (oData) {
                     var aIncidents = oData.results || [];
                     console.log("Incidents loaded (" + aIncidents.length + "):", JSON.stringify(aIncidents));
-                    alert("DEBUG: Backend returned " + aIncidents.length + " incidents for Employee " + sEmployeeId);
+                    // alert("DEBUG: Backend returned " + aIncidents.length + " incidents for Employee " + sEmployeeId);
 
                     var iOpen = 0, iInProgress = 0, iClosed = 0;
 

@@ -43,8 +43,14 @@ sap.ui.define([
             var oModel = this.getOwnerComponent().getModel();
             var oViewModel = this.getView().getModel("view");
 
-            // Load incidents - FETCH ALL (No Filter)
+            // Create filter for current employee
+            var aFilters = [
+                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
+            ];
+
+            // Load incidents - WITH FILTER
             oModel.read("/ZNK_INCIDENTSet", {
+                filters: aFilters,
                 urlParameters: {
                     "$format": "json"
                 },
@@ -78,16 +84,16 @@ sap.ui.define([
                 }.bind(this),
                 error: function (oError) {
                     console.error("Failed to load incidents:", oError);
-                    // Use sample data on error too
-                    oViewModel.setProperty("/totalIncidents", 5);
-                    oViewModel.setProperty("/openIncidents", 3);
-                    oViewModel.setProperty("/inProgressIncidents", 1);
-                    oViewModel.setProperty("/closedIncidents", 1);
+                    oViewModel.setProperty("/totalIncidents", 0);
+                    oViewModel.setProperty("/openIncidents", 0);
+                    oViewModel.setProperty("/inProgressIncidents", 0);
+                    oViewModel.setProperty("/closedIncidents", 0);
                 }
             });
 
-            // Load risks - FETCH ALL (No Filter)
+            // Load risks - WITH FILTER
             oModel.read("/ZNK_RISKSet", {
+                filters: aFilters,
                 urlParameters: {
                     "$format": "json"
                 },

@@ -10,13 +10,6 @@ sap.ui.define([
     return Controller.extend("ehsm.controller.Incidents", {
 
         onInit: function () {
-            // Check if user is logged in
-            var sEmployeeId = sessionStorage.getItem("employeeId");
-            if (!sEmployeeId) {
-                this.getOwnerComponent().getRouter().navTo("Login");
-                return;
-            }
-
             // Initialize view model
             var oViewModel = new JSONModel({
                 incidentCount: 0,
@@ -25,12 +18,20 @@ sap.ui.define([
             this.getView().setModel(oViewModel, "view");
             this.getView().setModel(oViewModel); // Set as default model for easier binding
 
-            // Load incidents
-            this._loadIncidents();
+            // Attach listener to reload data every time the view is shown
+            this.getOwnerComponent().getRouter().getRoute("Incidents").attachPatternMatched(this._onRouteMatched, this);
         },
 
-        _loadIncidents: function () {
+        _onRouteMatched: function () {
             var sEmployeeId = sessionStorage.getItem("employeeId");
+            if (!sEmployeeId) {
+                this.getOwnerComponent().getRouter().navTo("Login");
+                return;
+            }
+            this._loadIncidents(sEmployeeId);
+        },
+
+        _loadIncidents: function (sEmployeeId) {
             var oView = this.getView();
             var oViewModel = oView.getModel("view");
             var oModel = this.getOwnerComponent().getModel();

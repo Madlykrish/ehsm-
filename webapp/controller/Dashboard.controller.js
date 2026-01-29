@@ -10,16 +10,9 @@ sap.ui.define([
     return Controller.extend("ehsm.controller.Dashboard", {
 
         onInit: function () {
-            // Check if user is logged in
-            var sEmployeeId = sessionStorage.getItem("employeeId");
-            if (!sEmployeeId) {
-                this.getOwnerComponent().getRouter().navTo("Login");
-                return;
-            }
-
-            // Initialize view model
+            // Initialize view model with empty data
             var oViewModel = new JSONModel({
-                employeeId: sEmployeeId,
+                employeeId: "",
                 totalIncidents: 0,
                 openIncidents: 0,
                 inProgressIncidents: 0,
@@ -31,15 +24,26 @@ sap.ui.define([
             });
             this.getView().setModel(oViewModel, "view");
 
-            // Load dashboard data
-            this._loadDashboardData();
+            // Attach pattern matched listener to reload data every time we navigate here
+            this.getOwnerComponent().getRouter().getRoute("Dashboard").attachPatternMatched(this._onRouteMatched, this);
         },
 
-        _loadDashboardData: function () {
+        _onRouteMatched: function () {
             var sEmployeeId = sessionStorage.getItem("employeeId");
-            // alert("DEBUG: Dashboard loaded for ID: " + sEmployeeId);
-            console.log("Loading dashboard data for EmployeeId:", sEmployeeId);
+            if (!sEmployeeId) {
+                this.getOwnerComponent().getRouter().navTo("Login");
+                return;
+            }
 
+            // Update model with the current logged-in ID
+            this.getView().getModel("view").setProperty("/employeeId", sEmployeeId);
+
+            // Load dashboard data for this specific ID
+            this._loadDashboardData(sEmployeeId);
+        },
+
+        _loadDashboardData: function (sEmployeeId) {
+            console.log("Loading dashboard data for EmployeeId:", sEmployeeId);
             var oModel = this.getOwnerComponent().getModel();
             var oViewModel = this.getView().getModel("view");
 

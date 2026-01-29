@@ -10,13 +10,6 @@ sap.ui.define([
     return Controller.extend("ehsm.controller.Risks", {
 
         onInit: function () {
-            // Check if user is logged in
-            var sEmployeeId = sessionStorage.getItem("employeeId");
-            if (!sEmployeeId) {
-                this.getOwnerComponent().getRouter().navTo("Login");
-                return;
-            }
-
             // Initialize view model
             var oViewModel = new JSONModel({
                 riskCount: 0,
@@ -25,12 +18,20 @@ sap.ui.define([
             this.getView().setModel(oViewModel, "view");
             this.getView().setModel(oViewModel); // Set as default model for easier binding
 
-            // Load risks
-            this._loadRisks();
+            // Attach listener to reload data every time the view is shown
+            this.getOwnerComponent().getRouter().getRoute("Risks").attachPatternMatched(this._onRouteMatched, this);
         },
 
-        _loadRisks: function () {
+        _onRouteMatched: function () {
             var sEmployeeId = sessionStorage.getItem("employeeId");
+            if (!sEmployeeId) {
+                this.getOwnerComponent().getRouter().navTo("Login");
+                return;
+            }
+            this._loadRisks(sEmployeeId);
+        },
+
+        _loadRisks: function (sEmployeeId) {
             var oView = this.getView();
             var oViewModel = oView.getModel("view");
             var oModel = this.getOwnerComponent().getModel();

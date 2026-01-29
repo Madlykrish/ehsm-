@@ -43,13 +43,8 @@ sap.ui.define([
             var oModel = this.getOwnerComponent().getModel();
             var oViewModel = this.getView().getModel("view");
 
-            // Load incidents
-            var aIncidentFilters = [
-                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-            ];
-
+            // Load incidents - FETCH ALL (No Filter)
             oModel.read("/ZNK_INCIDENTSet", {
-                filters: aIncidentFilters,
                 urlParameters: {
                     "$format": "json"
                 },
@@ -81,13 +76,8 @@ sap.ui.define([
                 }
             });
 
-            // Load risks
-            var aRiskFilters = [
-                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-            ];
-
+            // Load risks - FETCH ALL (No Filter)
             oModel.read("/ZNK_RISKSet", {
-                filters: aRiskFilters,
                 urlParameters: {
                     "$format": "json"
                 },

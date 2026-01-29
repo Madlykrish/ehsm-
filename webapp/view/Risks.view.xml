@@ -31,12 +31,7 @@
                 <Table
                     id="risksTable"
                     items="{
-                        path: '/ZNK_RISKSet',
-                        filters: {
-                            path: 'EmployeeId',
-                            operator: 'EQ',
-                            value1: ''
-                        }
+                        path: '/ZNK_RISKSet'
                     }"
                     growing="true"
                     growingThreshold="20"

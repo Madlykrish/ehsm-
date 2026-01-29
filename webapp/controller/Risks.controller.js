@@ -33,11 +33,11 @@ sap.ui.define([
             var oBinding = oTable.getBinding("items");
 
             if (oBinding) {
-                // Apply filter for employee ID
-                var aFilters = [
-                    new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
-                ];
-                oBinding.filter(aFilters);
+                // FETCH ALL - Removed filter
+                // var aFilters = [
+                //     new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
+                // ];
+                // oBinding.filter(aFilters);
 
                 // Update count
                 var that = this;

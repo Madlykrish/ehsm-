@@ -31,12 +31,7 @@
                 <Table
                     id="incidentsTable"
                     items="{
-                        path: '/ZNK_INCIDENTSet',
-                        filters: {
-                            path: 'EmployeeId',
-                            operator: 'EQ',
-                            value1: ''
-                        }
+                        path: '/ZNK_INCIDENTSet'
                     }"
                     growing="true"
                     growingThreshold="20"

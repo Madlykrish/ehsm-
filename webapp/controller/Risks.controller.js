@@ -30,20 +30,36 @@ sap.ui.define([
         },
 
         _loadRisks: function () {
+            var sEmployeeId = sessionStorage.getItem("employeeId");
             var oView = this.getView();
             var oViewModel = oView.getModel("view");
             var oModel = this.getOwnerComponent().getModel();
 
             oView.setBusy(true);
 
-            // Fetch data manually to allow fallback
+            // Mandatory filter for backend data selection
+            var aFilters = [
+                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
+            ];
+
+            // Fetch data manually
             oModel.read("/ZNK_RISKSet", {
+                filters: aFilters,
                 urlParameters: {
                     "$format": "json"
                 },
                 success: function (oData) {
                     oView.setBusy(false);
-                    var aRisks = oData.results || [];
+                    var aResults = oData.results || [];
+
+                    // Parse dates if present in the data structure
+                    var aRisks = aResults.map(function (o) {
+                        if (o.RiskIdentificationDate && typeof o.RiskIdentificationDate === "string" && o.RiskIdentificationDate.indexOf("/Date") > -1) {
+                            var iMs = parseInt(o.RiskIdentificationDate.match(/\d+/)[0]);
+                            o.RiskIdentificationDate = new Date(iMs);
+                        }
+                        return o;
+                    });
 
                     if (aRisks.length === 0) {
                         MessageToast.show("Backend returned 0 Risks.");

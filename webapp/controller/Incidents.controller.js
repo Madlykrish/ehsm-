@@ -30,20 +30,40 @@ sap.ui.define([
         },
 
         _loadIncidents: function () {
+            var sEmployeeId = sessionStorage.getItem("employeeId");
             var oView = this.getView();
             var oViewModel = oView.getModel("view");
             var oModel = this.getOwnerComponent().getModel();
 
             oView.setBusy(true);
 
-            // Fetch data manually to allow fallback
+            // Mandatory filter for backend data selection
+            var aFilters = [
+                new Filter("EmployeeId", FilterOperator.EQ, sEmployeeId)
+            ];
+
+            // Fetch data manually
             oModel.read("/ZNK_INCIDENTSet", {
+                filters: aFilters,
                 urlParameters: {
                     "$format": "json"
                 },
                 success: function (oData) {
                     oView.setBusy(false);
-                    var aIncidents = oData.results || [];
+                    var aResults = oData.results || [];
+
+                    // Parse OData date strings for JSONModel compatibility
+                    var aIncidents = aResults.map(function (o) {
+                        if (o.IncidentDate && typeof o.IncidentDate === "string" && o.IncidentDate.indexOf("/Date") > -1) {
+                            var iInMs = parseInt(o.IncidentDate.match(/\d+/)[0]);
+                            o.IncidentDate = new Date(iInMs);
+                        }
+                        if (o.CompletionDate && typeof o.CompletionDate === "string" && o.CompletionDate.indexOf("/Date") > -1) {
+                            var iOutMs = parseInt(o.CompletionDate.match(/\d+/)[0]);
+                            o.CompletionDate = new Date(iOutMs);
+                        }
+                        return o;
+                    });
 
                     if (aIncidents.length === 0) {
                         MessageToast.show("Backend returned 0 Incidents.");

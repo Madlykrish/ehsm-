@@ -119,11 +119,10 @@ sap.ui.define([
                 }.bind(this),
                 error: function (oError) {
                     console.error("Failed to load risks:", oError);
-                    // Use sample data on error too
-                    oViewModel.setProperty("/totalRisks", 4);
-                    oViewModel.setProperty("/highRisks", 2);
-                    oViewModel.setProperty("/mediumRisks", 1);
-                    oViewModel.setProperty("/lowRisks", 1);
+                    oViewModel.setProperty("/totalRisks", 0);
+                    oViewModel.setProperty("/highRisks", 0);
+                    oViewModel.setProperty("/mediumRisks", 0);
+                    oViewModel.setProperty("/lowRisks", 0);
                 }
             });
         },

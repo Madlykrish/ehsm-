@@ -20,6 +20,8 @@ sap.ui.define([
             var sEmployeeId = sessionStorage.getItem("employeeId");
             if (sEmployeeId) {
                 this.getOwnerComponent().getRouter().navTo("Dashboard");
+            } else {
+                sessionStorage.removeItem("employeeId");
             }
         },
 

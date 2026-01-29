@@ -11,7 +11,6 @@ server:
         backend:
           - path: /sap
             url: http://172.17.19.24:8000
-            client: "100"
         ui5:
           path:
             - /resources
